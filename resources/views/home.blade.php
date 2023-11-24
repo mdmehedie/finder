@@ -14,7 +14,18 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    @can('isSuperAdmin')
+                        <h4>Admin can access this portion (admin)</h4>
+                    @endcan
+
+                    @can('isAdmin')
+                        <h4>User can access this portion (user)</h4>
+                    @endcan
+
+                    @can('isUser')
+                        <h4>Editor can access this portion (editor)</h4>
+                    @endcan
+
                 </div>
             </div>
         </div>
