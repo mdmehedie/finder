@@ -26,9 +26,9 @@
                         <td>{{ $post->description }}</td>
                         <td>{{ $post->user->name }}</td> {{-- From the Post.php Model name is comming from --}}
                         <td>
-                          
-                            <a href="#" class="btn btn-sm btn-success">View</a>
-                           
+                          @can('view', $post)  {{-- This view is comming from policy. --}}
+                          <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-success">View</a>
+                          @endcan
                         </td>
                       </tr>
                     @endforeach
