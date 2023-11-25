@@ -1,66 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# RestAPI Laravel using Laravel Sanctum for Authentication and Gate for Authorization
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a multiple role based Advanced Blog Application with API authentication using Laravel. A normal user can CRUD his own posts and also see all the posts, a admin can CRUD all the users posts and his own posts, and an Super Admin can CRUD all posts. Everyone can view the details of a single blog post. It includes user authentication, roles, and a API for managing blog posts and users.
 
-## About Laravel
+## Deployment
+Make sure active directory is on root project. Execute following commands:
+- `git pull origin main`
+- Done
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## If you are using Laravel 10+ then install Mix with this instruction
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- `composer create-project laravel/laravel advanced_blog_final`
+- `cd advanced_blog_final/`
+- Run `composer require laravel/ui`
+- Run `php artisan ui bootstrap --auth`
+- Run `rm vite.config.js`
+- Run `npm install --save-dev laravel-mix`
+- Create a __.webpack.mix.cjs__ and copy past-
+    const mix = require('laravel-mix');
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    mix.js('resources/js/app.js', 'public/js')
+    mix.postCss('resources/css/app.css', 'public/css', [
+        //
+    ]);
+- Update __.package.json:__
+    "type": "module",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+- In __..env__ file remove vite and add this:
+    MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+    MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+- From resources/js/app.js
+    Replace import __.'./bootstrap';__ with import __.'bootstrap';__
+- Run `npm install laravel-mix-versionhash --save-dev`
+- Run `npm run dev`
+- Remove from __.app.blade.php__
+    __.@vite(['resources/sass/app.scss', 'resources/js/app.js'])__
+- Add this two into this file into __.app.blade.php__
+    `<script src="{{ mix('js/app.js') }}" defer></script>`
+    `<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
 
-## Learning Laravel
+## How to use
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Clone the repository with `git clone https://github.com/algaddafy/Advanced-Blog-Application.git`
+- Run `cd advanced_blog_final`
+- Run `composer install`
+- Run `cp .env.example .env`
+- Copy __.env.example__ file to __.env__ and edit database credentials there
+- Run `php artisan key:generate`
+- Run `php artisan migrate`
+- Run `php artisan db:seed` Just for one time and then make comments full blocks of `run()` methods.
+- Run `php artisan serve` to run the application
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## API Route
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Register : http://127.0.0.1:8000/api/register using POST method. In Body tab, choose __form-data__, input __name__, __email__, __password__ and __password_confirmation__ or you can choose __raw__ and __JSON__
 
-## Laravel Sponsors
+- Login : http://127.0.0.1:8000/api/login using POST method. In Body tab, choose __form-data__, input __email__ and __password__ or you can choose __raw__ and __JSON__. Copy the token for the next API route.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Get self identity : http://127.0.0.1:8000/api/logged_user using GET method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-### Premium Partners
+- Logout : http://127.0.0.1:8000/api/logout using POST method. In Body tab, choose __form-data__, input __old_password__, __password__ and __password_confirmation__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Change Password : http://127.0.0.1:8000/api/change_password using POST method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-## Contributing
+- Reset Password : http://127.0.0.1:8000/api/resetpassword using POST method. In Body tab, choose __form-data__, input __email__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Retrieve All Users : http://127.0.0.1:8000/api/users
+    - Method: GET
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-## Code of Conduct
+- CRUD Posts : http://127.0.0.1:8000/api/posts
+    - Method: GET
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Retrieve a Specific Post: http://127.0.0.1:8000/api/posts/{post}
+    - Method: GET
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-## Security Vulnerabilities
+- Create a Post: http://127.0.0.1:8000/api/posts/create
+    - Method: POST
+    - Body: Choose form-data and input title, description
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Update a Post: http://127.0.0.1:8000/api/posts/{post}
+    - Method: PUT
+    - Body: Choose form-data and input title, description in Params tab
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-## License
+- Update a Post: http://127.0.0.1:8000/api/posts/{post}
+    - Method: DELETE
+    - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+	- Create blog : using POST method. In Body tab, choose __form-data__, input __title__, __content__, and __status__. In Authorization tab, choose Bearer Token type, paste the Token.
+
+
+Your time is valuable, and I appreciate your interest in this Blog Application. Your feedback is crucial to me. If you have suggestions for improvements or encounter bugs feel free to ask me.
+
+Continuous improvement is my __commitment.__
+
+Once again, thank you for time. Feel free to **[Contact me](https://www.linkedin.com/in/algaddafy/)**; for more information. 
