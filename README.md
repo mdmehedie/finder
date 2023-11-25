@@ -107,7 +107,6 @@ Make sure the active directory is on the root project. Execute the following com
 - Update a Post: http://127.0.0.1:8000/api/posts/{post}
     - Method: DELETE
     - Authorization: Bearer Token (Paste Token in Authorization tab)
-    - 
 ## Feedback and Support
 Your time is valuable, and I appreciate your interest in this Blog Application. Your feedback is crucial to me. If you have suggestions for improvements or encounter bugs feel free to ask me.
 
