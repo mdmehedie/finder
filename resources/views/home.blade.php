@@ -18,21 +18,21 @@
                         <div class="col">
                             @can('isSuperAdmin')
                                 <div class="alert alert-info" role="alert">
-                                    Supper Admin can access.
+                                    This is Supper Admin Dashboard.
                                 </div>
                             @endcan
                         </div>
                         <div class="col">
                             @can('isAdmin')
                                 <div class="alert alert-info" role="alert">
-                                    Admin can access.
+                                    This is Admin Dashboard.
                                 </div>
                             @endcan
                         </div>
                         <div class="col">
                             @can('isUser')
                                 <div class="alert alert-info" role="alert">
-                                    User can access.
+                                    This is User Dashboard.
                                 </div>
                             @endcan
                         </div>
