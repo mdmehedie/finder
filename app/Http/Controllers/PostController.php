@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
     public function index(Request $request)
     {
         $search = $request->input('search');
