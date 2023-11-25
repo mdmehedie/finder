@@ -16,15 +16,17 @@ Make sure the active directory is on the root project. Execute the following com
 - Run `rm vite.config.js`
 - Run `npm install --save-dev laravel-mix`
 - Create a __.webpack.mix.cjs__ and copy past-
+  ```bash
     const mix = require('laravel-mix');
 
     mix.js('resources/js/app.js', 'public/js')
     mix.postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+  ```
 - Update __.package.json:__
    ```bash
-        "type": "module",
+    "type": "module",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -35,18 +37,24 @@ Make sure the active directory is on the root project. Execute the following com
         "production": "mix --production"
     },
     ```
-- In __..env__ file remove vite and add this:
+- In __.env__ file remove vite and add this:
+```bash
     MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
     MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
 - From resources/js/app.js
-    Replace import __.'./bootstrap';__ with import __.'bootstrap';__
+```bash
+    Replace import __'./bootstrap';__ with import __.'bootstrap';__
+```
 - Run `npm install laravel-mix-versionhash --save-dev`
 - Run `npm run dev`
-- Remove from __.app.blade.php__
-    __.@vite(['resources/sass/app.scss', 'resources/js/app.js'])__
+- Remove from __app.blade.php__
+-     __.@vite(['resources/sass/app.scss', 'resources/js/app.js'])__
 - Add these two into this file into __.app.blade.php__
+  ```bash
     `<script src="{{ mix('js/app.js') }}" defer></script>`
     `<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
+  ```
 
 ## How to use
 
@@ -99,10 +107,8 @@ Make sure the active directory is on the root project. Execute the following com
 - Update a Post: http://127.0.0.1:8000/api/posts/{post}
     - Method: DELETE
     - Authorization: Bearer Token (Paste Token in Authorization tab)
-
-	- Create blog: using the POST method. In Body tab, choose __form-data__, input __title__, __content__, and __status__. In the Authorization tab, choose Bearer Token type, and paste the Token.
-
-
+    - 
+## Feedback and Support
 Your time is valuable, and I appreciate your interest in this Blog Application. Your feedback is crucial to me. If you have suggestions for improvements or encounter bugs feel free to ask me.
 
 Continuous improvement is my __commitment.__
