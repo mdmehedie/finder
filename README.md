@@ -52,8 +52,8 @@ Make sure the active directory is on the root project. Execute the following com
 -     __.@vite(['resources/sass/app.scss', 'resources/js/app.js'])__
 - Add these two into this file into __.app.blade.php__
   ```bash
-    `<script src="{{ mix('js/app.js') }}" defer></script>`
-    `<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   ```
 
 ## How to use
