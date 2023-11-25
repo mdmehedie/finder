@@ -1,9 +1,9 @@
-# RestAPI Laravel using Laravel Sanctum for Authentication and Gate for Authorization
+# Advanced Blog Application with Sanctum API and Policies using Laravel 10
 
-This is a multiple role based Advanced Blog Application with API authentication using Laravel. A normal user can CRUD his own posts and also see all the posts, a admin can CRUD all the users posts and his own posts, and an Super Admin can CRUD all posts. Everyone can view the details of a single blog post. It includes user authentication, roles, and a API for managing blog posts and users.
+This is a multiple-role-based Advanced Blog Application with API authentication using Laravel. A normal user can CRUD his own posts and also see all the posts, an admin can CRUD all the user's posts and his own posts, and a Super Admin can CRUD all posts. Everyone can view the details of a single blog post. It includes user authentication, roles, and an API for managing blog posts and users.
 
 ## Deployment
-Make sure active directory is on root project. Execute following commands:
+Make sure the active directory is on the root project. Execute the following commands:
 - `git pull origin main`
 - Done
 
@@ -42,7 +42,7 @@ Make sure active directory is on root project. Execute following commands:
 - Run `npm run dev`
 - Remove from __.app.blade.php__
     __.@vite(['resources/sass/app.scss', 'resources/js/app.js'])__
-- Add this two into this file into __.app.blade.php__
+- Add these two into this file into __.app.blade.php__
     `<script src="{{ mix('js/app.js') }}" defer></script>`
     `<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
 
@@ -60,23 +60,23 @@ Make sure active directory is on root project. Execute following commands:
 
 ## API Route
 
-- Register : http://127.0.0.1:8000/api/register using POST method. In Body tab, choose __form-data__, input __name__, __email__, __password__ and __password_confirmation__ or you can choose __raw__ and __JSON__
+- Register http://127.0.0.1:8000/api/register using the POST method. In Body tab, choose __form-data__, input __name__, __email__, __password__ and __password_confirmation__ or you can choose __raw__ and __JSON__
 
-- Login : http://127.0.0.1:8000/api/login using POST method. In Body tab, choose __form-data__, input __email__ and __password__ or you can choose __raw__ and __JSON__. Copy the token for the next API route.
+- Login: http://127.0.0.1:8000/api/login using POST method. In Body tab, choose __form-data__, input __email__ and __password__ or you can choose __raw__ and __JSON__. Copy the token for the next API route.
 
-- Get self identity : http://127.0.0.1:8000/api/logged_user using GET method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
+- Get self-identity: http://127.0.0.1:8000/api/logged_user using GET method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-- Logout : http://127.0.0.1:8000/api/logout using POST method. In Body tab, choose __form-data__, input __old_password__, __password__ and __password_confirmation__. In Authorization tab, choose Bearer Token type, paste the Token.
+- Logout: http://127.0.0.1:8000/api/logout using POST method. In Body tab, choose __form-data__, input __old_password__, __password__ and __password_confirmation__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-- Change Password : http://127.0.0.1:8000/api/change_password using POST method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
+- Change Password: http://127.0.0.1:8000/api/change_password using POST method. In Body tab, choose __form-data__, input __email__ and __password__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-- Reset Password : http://127.0.0.1:8000/api/resetpassword using POST method. In Body tab, choose __form-data__, input __email__. In Authorization tab, choose Bearer Token type, paste the Token.
+- Reset Password: http://127.0.0.1:8000/api/resetpassword using POST method. In Body tab, choose __form-data__, input __email__. In Authorization tab, choose Bearer Token type, paste the Token.
 
-- Retrieve All Users : http://127.0.0.1:8000/api/users
+- Retrieve All Users: http://127.0.0.1:8000/api/users
     - Method: GET
     - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-- CRUD Posts : http://127.0.0.1:8000/api/posts
+- CRUD Posts: http://127.0.0.1:8000/api/posts
     - Method: GET
     - Authorization: Bearer Token (Paste Token in Authorization tab)
 
@@ -91,18 +91,18 @@ Make sure active directory is on root project. Execute following commands:
 
 - Update a Post: http://127.0.0.1:8000/api/posts/{post}
     - Method: PUT
-    - Body: Choose form-data and input title, description in Params tab
+    - Body: Choose form-data and input the title, and description in Params tab
     - Authorization: Bearer Token (Paste Token in Authorization tab)
 
 - Update a Post: http://127.0.0.1:8000/api/posts/{post}
     - Method: DELETE
     - Authorization: Bearer Token (Paste Token in Authorization tab)
 
-	- Create blog : using POST method. In Body tab, choose __form-data__, input __title__, __content__, and __status__. In Authorization tab, choose Bearer Token type, paste the Token.
+	- Create blog: using the POST method. In Body tab, choose __form-data__, input __title__, __content__, and __status__. In the Authorization tab, choose Bearer Token type, and paste the Token.
 
 
 Your time is valuable, and I appreciate your interest in this Blog Application. Your feedback is crucial to me. If you have suggestions for improvements or encounter bugs feel free to ask me.
 
 Continuous improvement is my __commitment.__
 
-Once again, thank you for time. Feel free to **[Contact me](https://www.linkedin.com/in/algaddafy/)**; for more information. 
+Once again, thank you for your time. Feel free to **[Contact me](https://www.linkedin.com/in/algaddafy/)**; for more information. 
