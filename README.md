@@ -23,7 +23,8 @@ Make sure the active directory is on the root project. Execute the following com
         //
     ]);
 - Update __.package.json:__
-    "type": "module",
+   ```bash
+        "type": "module",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -33,6 +34,7 @@ Make sure the active directory is on the root project. Execute the following com
         "prod": "npm run production",
         "production": "mix --production"
     },
+    ```
 - In __..env__ file remove vite and add this:
     MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
     MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
