@@ -40,7 +40,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        //
+            return true;
     }
 
     /**
@@ -49,13 +49,13 @@ class PostPolicy
     public function update(User $user, Post $post): bool
     {
         if ($user->role == 'superadmin') {
-            // Superadmin can see all posts
+            // Superadmin can update all posts
             return true;
         } elseif ($user->role == 'admin') {
-            // Admin can see their own posts and posts by users
+            // Admin can update their own posts and posts by users
             return $user->id === $post->user_id || $post->user->role == 'user';
         } elseif ($user->role == 'user') {
-            // User can only see their own posts
+            // User can only update their own posts
             return $user->id === $post->user_id;
         }
         return false;
@@ -67,13 +67,13 @@ class PostPolicy
     public function delete(User $user, Post $post): bool
     {
         if ($user->role == 'superadmin') {
-            // Superadmin can see all posts
+            // Superadmin can delete all posts
             return true;
         } elseif ($user->role == 'admin') {
-            // Admin can see their own posts and posts by users
+            // Admin can delete their own posts and posts by users
             return $user->id === $post->user_id || $post->user->role == 'user';
         } elseif ($user->role == 'user') {
-            // User can only see their own posts
+            // User can only delete their own posts
             return $user->id === $post->user_id;
         }
         return false;

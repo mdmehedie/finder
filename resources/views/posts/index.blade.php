@@ -8,10 +8,15 @@
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </div>
 </form>
-    <h3>{{ Auth::user()->name }}</h3>
-    <hr>
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+<h3>{{ Auth::user()->name }}</h3>
+<div class="row justify-content-between">
+    <div class="col-md-4">
+        <a href="{{ route('posts.create') }}" class="btn btn-success mb-3">Add Post</a>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-center">
+    <div class="col-md-12">
 
             <table class="table">
                 <thead>
@@ -36,11 +41,11 @@
                           <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-primary">View</a>
                           @endcan
 
-                          @can('update', $post)  {{-- This view is coming from policy. --}}
-                          <a href="{{ route('post.update', $post) }}" class="btn btn-sm btn-warning">Update</a>
+                          @can('update', $post)  {{-- This update is coming from policy. --}}
+                          <a href="{{ route('post.edit', $post->id) }}" class="btn btn-sm btn-warning">Update</a>
                           @endcan
 
-                          @can('delete', $post)  {{-- This view is coming from policy. --}}
+                          @can('delete', $post)  {{-- This delete is coming from policy. --}}
                           <a href="{{ route('post.delete', $post) }}" class="btn btn-sm btn-danger">Delete</a>
                           @endcan
                         </td>
