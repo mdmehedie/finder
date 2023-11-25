@@ -14,20 +14,33 @@
                         </div>
                     @endif
 
-                    @can('isSuperAdmin')
-                        <h4>Supper Admin can access.</h4>
-                    @endcan
+                    <div class="row mb-3">
+                        <div class="col">
+                            @can('isSuperAdmin')
+                                <div class="alert alert-info" role="alert">
+                                    Supper Admin can access.
+                                </div>
+                            @endcan
+                        </div>
+                        <div class="col">
+                            @can('isAdmin')
+                                <div class="alert alert-info" role="alert">
+                                    Admin can access.
+                                </div>
+                            @endcan
+                        </div>
+                        <div class="col">
+                            @can('isUser')
+                                <div class="alert alert-info" role="alert">
+                                    User can access.
+                                </div>
+                            @endcan
+                        </div>
+                    </div>
 
-                    @can('isAdmin')
-                        <h4>Admin can access.</h4>
-                    @endcan
-
-                    @can('isUser')
-                        <h4>User can access.</h4>
-                    @endcan
-
-                    <a href="{{ route('posts.index') }}" class="btn btn-sm btn-success">Posts</a>
-
+                    <div class="text-center">
+                        <a href="{{ route('posts.index') }}" class="btn btn-info">View Posts</a>
+                    </div>
                 </div>
             </div>
         </div>
