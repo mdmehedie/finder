@@ -100,8 +100,9 @@ Make sure active directory is on root project. Execute following commands:
 
 	- Create blog : using POST method. In Body tab, choose __form-data__, input __title__, __content__, and __status__. In Authorization tab, choose Bearer Token type, paste the Token.
 
+
 Your time is valuable, and I appreciate your interest in this Blog Application. Your feedback is crucial to me. If you have suggestions for improvements or encounter bugs feel free to ask me.
 
 Continuous improvement is my __commitment.__
 
-Once again, thank you for time. Feel free to **[Contact me](https://www.linkedin.com/in/algaddafy/)**; for more information.
+Once again, thank you for time. Feel free to **[Contact me](https://www.linkedin.com/in/algaddafy/)**; for more information. 

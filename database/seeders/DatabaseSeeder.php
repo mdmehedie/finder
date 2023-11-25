@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'role' => 'user'
         ]);
-
        Post::factory(10)->create();
     }
 }
