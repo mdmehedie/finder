@@ -68,6 +68,17 @@ Make sure the active directory is on the root project. Execute the following com
 - Run `php artisan db:seed` Just for one time and then make comments full blocks of `run()` methods.
 - Run `php artisan serve` to run the application
 
+## User Credentials
+
+- Email: superadmin@gmail.com
+- Password: 12345678
+
+- Email: admin@gmail.com
+- Password: 12345678
+
+- Email: user@gmail.com
+- Password: 12345678
+
 ## API Route
 
 - Register http://127.0.0.1:8000/api/register using the POST method. In Body tab, choose __form-data__, input __name__, __email__, __password__ and __password_confirmation__ or you can choose __raw__ and __JSON__
