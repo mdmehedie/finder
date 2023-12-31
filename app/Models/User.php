@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DateTimeZone;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use \Datetime;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function isAdmin()
+    {
+        return $this->role == 'admin' ? 1 : 0;
+    }
+    public function isActive()
+    {
+        if($this->role == 'admin' || $this->role == 'superadmin'){
+            return true;
+        }
+
+        $now = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+        if($now > $this->activationDate){
+            $this->isActive = 0;
+            $this->save();
+        }
+        return $this->isActive == 1;
+    }
 }
