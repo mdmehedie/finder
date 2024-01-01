@@ -9,13 +9,13 @@ class TextFindsController extends Controller
     private function findSnapID($text)
     {
         $patterns = [
-            'snap', 'Sc', 'SnapChat', 'snapchat', 'Snp', 'AMOSC',
-            '👻', 'Snap', 'SN', 'Snk', 'SNK', 'SC', 'SNAP'
+            'snap', 'sc', 'SnapChat', 'snapchat', 'Snp', 'AMOSC',
+            '👻', 'Snap', 'SN', 'Snk', 'SNK', 'SNAP'
         ];
 
         $patternRegex = implode('|', array_map('preg_quote', $patterns));
 
-        $regex = "/($patternRegex):\\w+/i";
+        $regex = "/($patternRegex)[ ]*(:|::|.|,)[ ]*\\w+/i";
 
         preg_match_all($regex, $text, $matches);
 
@@ -45,12 +45,13 @@ class TextFindsController extends Controller
     }
     private function findsNumber ($text){
 
-        $regex = '/\b(\d+)[-]*(\d+)\b/';
+        $regex = '/\b(\d+)[-| ]*(\d+)\b/';
         preg_match_all($regex, $text, $matches);
 
         $result = [];
         foreach ($matches[0] as $match) {
-            $result[] = $match;
+            if(strlen($match) > 5)
+                $result[] = $match;
         }
         $data = $result ? implode(', ', $result) : 'Nothing found';
         return $data;
@@ -61,7 +62,7 @@ class TextFindsController extends Controller
         // dd($request);
         $numbers ='<p> Numbers: ' . $this->findsNumber($request->inputText) . '</p>';
 
-        $email = '<p> Emails: ' . $this->findEmails($request->inputText) . '</p>';
+        $email = '<p> Emails or Telegram: ' . $this->findEmails($request->inputText) . '</p>';
 
         $snapID = '<p> Snap ID: ' . $this->findSnapID($request->inputText) . '</p>';
 
