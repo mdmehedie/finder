@@ -55,7 +55,9 @@ class User extends Authenticatable
         }
 
         $now = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-        if($now > $this->activationDate){
+//        $today = date('d-m-y', strtotime($now));
+//        dd(now(), $this->activationDate);
+        if($this && $this->activationDate < now()){
             $this->isActive = 0;
             $this->save();
         }

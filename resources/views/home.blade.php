@@ -4,9 +4,11 @@
     @can('isUser')
         @include('user-dashboard')
     @endcan
-{{--    @can('isAdmin')--}}
-{{--        @include('admin-dashboard')--}}
-{{--    @endcan--}}
+    @can('isAdmin')
+        <section class="container">
+            <a href="{{route('dashboard')}}" class="btn btn-primary btn-sm px-2">Dashboard</a>
+        </section>
+    @endcan
     @can('isSuperAdmin')
         <div class="alert alert-info" role="alert">
             This is Supper Admin Dashboard.
@@ -21,9 +23,6 @@
 
 @push('scripts')
     <script>
-        new DataTable('#example', {
-            pagingType: 'full_numbers'
-        });
 
         $(document).ready(function () {
 

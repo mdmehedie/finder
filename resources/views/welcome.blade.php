@@ -22,16 +22,16 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 text-center">
                 <!-- Blog Logo or Image -->
-                <img src="{{ asset('assets/blog-home.jpg') }}" alt="Blog Logo" class="img-fluid mb-3">
+{{--                <img src="{{ asset('assets/blog-home.jpg') }}" alt="Blog Logo" class="img-fluid mb-3">--}}
 
                 <!-- Blog Title -->
-                <h1 class="font-weight-bold mb-4">Welcome to Our Blog</h1>
+                <h1 class="font-weight-bold mb-4">Welcome to Finder App</h1>
 
                 <!-- Navigation Links -->
                 @if (Route::has('login'))
                 <div class="text-center">
                     @auth
-                    <a href="{{ url('/home') }}" class="btn btn-primary btn-lg">Home</a>
+                    <a href="{{ url('/home') }}" class="btn btn-primary btn-lg">Finder</a>
                     @else
                     <a href="{{ route('login') }}" class="btn btn-secondary btn-lg">Log in</a>
                     @if (Route::has('register'))

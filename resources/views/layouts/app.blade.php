@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
@@ -19,11 +20,11 @@
 
 </head>
 <body>
-    <div id="app">
+    <section id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Finder') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -77,8 +78,12 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
+
+
+    </section>
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     @stack('scripts')
 </body>
 </html>

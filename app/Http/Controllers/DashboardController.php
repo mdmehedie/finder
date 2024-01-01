@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', '=', 'user')->get();
+        $users = User::where('role', '=', 'user')->paginate(10);
         return view('admin-dashboard', compact('users'));
     }
 
@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $request->id,
-            'activationDate' => 'date',
+            'activationDate' => 'date|nullable',
             'isActive'=>'nullable'
         ]);
 
@@ -41,6 +41,7 @@ class DashboardController extends Controller
         $user->email = $request->input('email');
         $user->activationDate = $request->input('activationDate');
         $user->isActive = $request->has('isActive'); // Set isActive based on the request
+
         $user->save();
 
         return redirect()->route('dashboard')->with('success', 'User updated successfully!');

@@ -31,4 +31,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/user/edit/{id}', [DashboardController::class, 'edit'])->name('dashboard.user.edit');
     Route::put('/dashboard/user/update/{id}', [DashboardController::class, 'update'])->name('dashboard.user.update');
+    Route::put('/dashboard/user/delete/{id}', [DashboardController::class, 'destroy'])->name('dashboard.user.delete');
 });

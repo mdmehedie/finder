@@ -21,13 +21,47 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->activationDate}}</td>
                     <td>{{$user->isActive ? 'Active' : 'Inactive'}}</td>
-                    <td><a href="{{route('dashboard.user.edit', $user->id)}}" class="btn btn-sm btn-outline-dark">Edit </a></td>
+                    @can('isAdmin')
+                    <td class="d-flex">
+                        <a href="{{route('dashboard.user.edit', $user->id)}}" class="btn btn-sm btn-outline-dark" style="margin-right: 10px">Edit </a>
+                        <form method="POST" action="{{ route('dashboard.user.delete', $user->id) }}" onsubmit="return confirm('Are you sure you want to delete this blog?')">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="ml-2 btn btn-sm btn-outline-danger">Delete </button>
+                        </form>
+                    </td>
+                    @endcan
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+        <div class="row">
+            <div class="d-flex justify-content-end align-items-center">
+                <div class="pagination ml-2">
+                    <span>Showing {{ $users->currentPage() }} of {{ $users->lastPage() }}</span>
+                </div>
+                @if ($users->previousPageUrl())
+                    <a href="{{ $users->previousPageUrl() }}" rel="prev" class="btn btn-primary mx-2">&laquo;
+                        Previous</a>
+                @else
+                    <span class="btn btn-secondary disabled mx-2">&laquo; Previous</span>
+                @endif
+                @for ($i = 1; $i <= $users->lastPage(); $i++)
+                    <a href="{{ $users->url($i) }}"
+                       class="btn btn-outline-primary mx-2 {{ ($users->currentPage() == $i) ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+
+                @if ($users->nextPageUrl())
+                    <a href="{{ $users->nextPageUrl() }}" rel="next" class="btn btn-primary mx-2">Next &raquo;</a>
+                @else
+                    <span class="btn btn-secondary disabled mx-2">Next &raquo;</span>
+                @endif
+            </div>
+        </div>
     </section>
 @endsection
+
 
 
 
