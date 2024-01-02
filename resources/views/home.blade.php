@@ -6,7 +6,7 @@
     @endcan
     @can('isAdmin')
         <section class="container">
-            <a href="{{route('dashboard')}}" class="btn btn-primary btn-sm px-2">Dashboard</a>
+            <a href="{{route('dashboard')}}" class="btn btn-primary btn-sm px-2">User List</a>
         </section>
     @endcan
     @can('isSuperAdmin')
