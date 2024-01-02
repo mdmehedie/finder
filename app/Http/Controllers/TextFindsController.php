@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AllFindsData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TextFindsController extends Controller
 {
@@ -23,7 +26,7 @@ class TextFindsController extends Controller
         foreach ($matches[0] as $match) {
             $result[] = $match;
         }
-        $data = $result ? implode(', ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : 'Nothing found';
 
         return $data;
 
@@ -39,7 +42,7 @@ class TextFindsController extends Controller
         foreach ($matches[0] as $match) {
             $result[] = $match;
         }
-        $data = $result ? implode(', ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : 'Nothing found';
 
         return $data;
     }
@@ -53,23 +56,34 @@ class TextFindsController extends Controller
             if(strlen($match) > 5)
                 $result[] = $match;
         }
-        $data = $result ? implode(', ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : 'Nothing found';
         return $data;
     }
 
     public function submitText(Request $request){
 
-        // dd($request);
-        $numbers ='<p> Numbers: ' . $this->findsNumber($request->inputText) . '</p>';
+        $findsData['user_id'] = Auth::user()->id;
+        $findsData['phone_number'] = $this->findsNumber($request->inputText);
+        $findsData['email'] = $this->findEmails($request->inputText);
+        $findsData['snap_id'] = $this->findSnapID($request->inputText);
 
-        $email = '<p> Emails or Telegram: ' . $this->findEmails($request->inputText) . '</p>';
+        $validation = Validator::make($findsData, [
+            'phone_number' => 'unique:all_finds_data,phone_number',
+            'email' => 'unique:all_finds_data,email',
+            'snap_id' => 'unique:all_finds_data,snap_id',
+        ]);
 
-        $snapID = '<p> Snap ID: ' . $this->findSnapID($request->inputText) . '</p>';
+        if (!$validation->fails()) {
+            AllFindsData::create($findsData);
+        }
 
-        $data = $numbers . $email . $snapID;
-        // Your logic here...
 
-        // Return a response (optional)
+        $number ='<p> Numbers: ' . $findsData['phone_number'] . '</p>';
+        $email = '<p> Emails or Telegram: ' . $findsData['email'] . '</p>';
+        $snapID = '<p> Snap ID: ' . $findsData['snap_id'] . '</p>';
+
+        $data = $number . $email . $snapID;
+
         return $data ;
     }
 }

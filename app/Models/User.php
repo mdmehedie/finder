@@ -63,4 +63,15 @@ class User extends Authenticatable
         }
         return $this->isActive == 1;
     }
+
+
+    /**
+     * Define a one-to-many relationship with the SearchHistory model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function searchHistory()
+    {
+        return $this->hasMany(AllFindsData::class);
+    }
 }
