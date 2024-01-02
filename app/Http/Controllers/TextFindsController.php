@@ -26,7 +26,7 @@ class TextFindsController extends Controller
         foreach ($matches[0] as $match) {
             $result[] = $match;
         }
-        $data = $result ? implode('; ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : '';
 
         return $data;
 
@@ -42,7 +42,7 @@ class TextFindsController extends Controller
         foreach ($matches[0] as $match) {
             $result[] = $match;
         }
-        $data = $result ? implode('; ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : '';
 
         return $data;
     }
@@ -56,7 +56,7 @@ class TextFindsController extends Controller
             if(strlen($match) > 5)
                 $result[] = $match;
         }
-        $data = $result ? implode('; ', $result) : 'Nothing found';
+        $data = $result ? implode('; ', $result) : '';
         return $data;
     }
 
@@ -73,10 +73,13 @@ class TextFindsController extends Controller
             'snap_id' => 'unique:all_finds_data,snap_id',
         ]);
 
-        if (!$validation->fails()) {
+        if (!$validation->fails() && ($findsData['phone_number'] || $findsData['email'] || $findsData['snap_id'])) {
             AllFindsData::create($findsData);
         }
 
+        $findsData['phone_number'] = $findsData['phone_number'] ? $findsData['phone_number'] : 'Nothing found';
+        $findsData['email'] = $findsData['email'] ? $findsData['email'] : 'Nothing found';
+        $findsData['snap_id'] = $findsData['snap_id'] ? $findsData['snap_id'] : 'Nothing found';
 
         $number ='<p> Numbers: ' . $findsData['phone_number'] . '</p>';
         $email = '<p> Emails or Telegram: ' . $findsData['email'] . '</p>';
