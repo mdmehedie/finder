@@ -7,7 +7,7 @@
                         <div style="margin-right: 1rem">
                             <form method="POST" action="{{ route("submit.text") }}">
                                 @csrf
-                                <textarea class="form-control" id="inputText" rows="20" placeholder="Type or Paste any Text"></textarea>
+                                <textarea class="form-control" id="inputText" rows="15" placeholder="Type or Paste any Text"></textarea>
                             </form>
                         </div>
                     </div>
